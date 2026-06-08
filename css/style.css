@@ -1,0 +1,377 @@
+@import url("https://fonts.googleapis.com/css?family=Amatic+SC:400,700");
+
+html, body {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-y: auto !important; /* Permitimos el scroll vertical */
+  overflow-x: hidden;         
+  background-color: #030a2652;   /* Fondo oscuro de respaldo */
+}
+
+body {
+  font-family: 'Amatic SC', sans-serif;
+  color: #fff;
+}
+
+/* CAPAS DE FONDO TOTALMENTE FIJAS */
+.contenedor-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -10;
+  pointer-events: none; /* El mouse lo ignora, importante para optimizacion*/
+/* TRUCO CLAVE OPTIMIZACION will-change para avisar al navegador que esta animado */
+  transform: translate3d(0, 0, 0); /*  translate3d para moverlo por hardware (GPU) OPTIMIZACIÓN IMPORTANTE */
+  will-change: transform;
+}
+
+.video-fondo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+
+/* Tu degradado original pero corregido para que no rompa el scroll de sus hijos */
+.degradado {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100vh;
+  z-index: -5; /* detrás del contenido */
+  pointer-events: none; /* Permite hacer scroll a través de él / optimizacion tb*/
+  background: radial-gradient(ellipse farthest-corner at 50% 51%, rgba(3, 10, 38, 0.85) 40.5%, rgba(3, 8, 73, 0.5) 56%, rgba(15, 11, 76, 0) 78.7%);
+}
+
+/* ESTRUCTURA HORIZONTAL PARA GSAP */
+.contenedor-scroll {
+will-change: transform; /* optimizacion */
+  display: flex;
+  flex-wrap: nowrap;
+  width: 400%; /* Las 4 secciones en fila india */
+  height: 100vh;
+  position: relative;
+}
+
+/* Forzamos a que cada sección ocupe exactamente una pantalla */
+.section-01, .section-02, .section-03, .section-04 {
+  width: 100vw;
+  height: 100vh;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+  padding: 40px;
+}
+
+/* Ajustes de texto tembloroso :) */
+.test {
+  -webkit-animation: squiggly-anim 0.34s linear infinite;
+          animation: squiggly-anim 0.34s linear infinite;
+  display: inline-block;
+  width: 100%;
+  outline: none;
+  font-size: 100px;
+  line-height: 1.1;
+}
+
+.small { font-size: 0.5em; }
+.smaller { font-size: 0.4em; }
+p { margin: 0; }
+
+/* Animación de filtros */
+@-webkit-keyframes squiggly-anim {
+  0% { filter: url("#squiggly-0"); }
+  25% { filter: url("#squiggly-1"); }
+  50% { filter: url("#squiggly-2"); }
+  75% { filter: url("#squiggly-3"); }
+  100% { filter: url("#squiggly-4"); }
+}
+@keyframes squiggly-anim {
+  0% { filter: url("#squiggly-0"); }
+  25% { filter: url("#squiggly-1"); }
+  50% { filter: url("#squiggly-2"); }
+  75% { filter: url("#squiggly-3"); }
+  100% { filter: url("#squiggly-4"); }
+}
+
+
+/*-------BOTON ANIMADO--------*/
+
+.ak{
+  position: relative;
+  display: inline-block;
+  padding: 25px 30px;
+  margin: 40px;
+  color: #03e9f4;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: 0.5s;
+  letter-spacing: 4px;
+  overflow: hidden;
+  margin-right: 50px;
+  font-size: 4.5em;
+  width: auto;
+}
+.ak:hover {
+  background: #03e9f4;
+  color: #050801;
+  box-shadow: 0 0 5px #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4,
+    0 0 200px #03e9f4;
+  -webkit-box-reflect: below 1px linear-gradient(transparent, #0005);
+    cursor: pointer;
+}
+.ak:nth-child(1) {
+  filter: hue-rotate(270deg);
+}
+.ak:nth-child(2) {
+  filter: hue-rotate(110deg);
+}
+.ak span {
+  position: absolute;
+  display: block;
+}
+.ak span:nth-child(1) {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #03e9f4);
+  animation: animate1 3s linear infinite; /* primer "rayito" horizontal que se mueve del borde*/
+}
+@keyframes animate1 {
+  0% {
+    left: -100%;
+  }
+  50%,
+  100% {
+    left: 100%;
+  }
+}
+.ak span:nth-child(2) {
+  top: -100%;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(180deg, transparent, #03e9f4);
+  animation: animate2 3s linear infinite; /* segundo "rayito" vertical que se mueve del borde*/
+  animation-delay: 1.2s;
+}
+@keyframes animate2 {
+  0% {
+    top: -100%;
+  }
+  50%,
+  100% {
+    top: 100%;
+  }
+}
+.ak span:nth-child(3) {
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(270deg, transparent, #03e9f4);
+  animation: animate3 3s linear infinite;
+  animation-delay: 2.4s;
+}
+@keyframes animate3 {
+  0% {
+    right: -100%;
+  }
+  50%,
+  100% {
+    right: 100%;
+  }
+}
+
+.ak span:nth-child(4) {
+  bottom: -100%;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(360deg, transparent, #03e9f4);
+  animation: animate4 3s linear infinite;
+  animation-delay: 3.6s;
+}
+@keyframes animate4 {
+  0% {
+    bottom: -100%;
+  }
+  50%,
+  100% {
+    bottom: 100%;
+  }
+}
+
+.salida{
+    max-width: fit-content;
+}
+
+
+#cache-badge {
+  font-size: 0.8rem; padding: 3px 8px; border-radius: 10px;
+  background: #e0e0e0; color: #555; vertical-align: middle;
+}
+#cache-badge.cached { background: #c8f5c8; color: #1a6b1a; }
+.lista-personajes { 
+    list-style: none;
+     padding: 0; 
+     color: white;
+    font-size: 3em;}
+
+.lista-personajes li { 
+    padding: 4px 0; 
+}
+.grupo-especie { margin-bottom: 12px; }
+.grupo-especie h3 { 
+    margin: 0 0 4px 0;
+     color: #fff;
+     font-size: 3em;
+ }
+.grupo-especie ul { 
+    margin: 0; 
+    padding-left: 20px; 
+    list-style: none;
+    color: #fff;
+    font-size: 3em;
+}
+.tarjetas { 
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; 
+  gap: 16px;
+  justify-content: center; 
+  align-items: center;
+  
+  /* CLAVE: Evitamos márgenes que empujen la sección y rompan el alto de GSAP */
+  margin: 0; 
+  padding: 20px;
+  
+  /* Aseguramos que si las tarjetas son muchas, no estiren la sección hacia abajo */
+  max-width: 100%;
+  max-height: 100%; 
+  box-sizing: border-box;
+}
+
+/* LAS TARJETAS */
+.tarjeta {
+  text-align: center; 
+  width: 340px;
+  box-sizing: border-box;
+  /* Tus estilos visuales (background, borders, etc.) */
+}
+.tarjeta img { 
+    width: 280px;
+     border-radius: 50%; 
+    }
+.tarjeta p { 
+    margin: 4px 0; 
+    font-size: 2rem; 
+}
+.tarjeta .nombre {
+     font-weight: bold;
+     }
+.salida {
+     margin-top: 12px;
+     max-height: 50vh;
+      overflow-y: auto;
+       width: 100%; }
+
+
+/*MOUSE*/
+
+/* La partícula de la nebulosa */
+.nebulosa-particle {
+    will-change: transform, opacity; /*importante para performace*/
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  background-color: #a2ff009e; /* Verde limón brillante */
+  border-radius: 50%;
+  pointer-events: none; /* Evita que las partículas interfieran con los clics */
+  transform: translate(-50%, -50%);
+  mix-blend-mode: screen; /* Hace que al encimarse brillen más */
+  
+  /*  brillo expandido y difuminado */
+  box-shadow: 
+    0 0 20px #bfff00,
+    0 0 40px #a3e600,
+    0 0 60px #80b300;
+  
+  /* Animación de desvanecimiento */
+  transition: transform 0.4s ease-out, opacity 0.9s ease-out;
+  opacity: 1;
+  z-index: 9999;
+}
+
+/* Para ocultar las barras de desplazamiento de las listas de texto principalmente */
+.sin-flechas::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+/* Oculta la barra completa (y las flechas) en Firefox */
+.sin-flechas {
+    scrollbar-width: none !important; /* Elimina la barra en Firefox */
+    overflow-y: auto;                  /* Mantiene el scroll vertical activo */
+    -ms-overflow-style: none;          /* Oculta la barra en Internet Explorer antiguo */
+}
+
+  
+/*SCROLL ANIMACION*/
+
+
+.scroll-indicador {
+
+  width: 30px;
+  height: 70px;
+  border: 3px solid rgba(87, 157, 218, 0.164); /* Un poco más brillante */
+  border-radius: 35%;
+  display: flex;
+  justify-content: center;
+  pointer-events: none; 
+  z-index: 20;
+  margin-top:7%; 
+}
+
+.scroll-ruedita {
+  width: 20px;
+  height: 20px;
+  background-color: rgba(87, 157, 218, 0.329);
+  border-radius: 50%;
+  margin-top: 6px;
+  animation: deslizarRuedita 2s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+}
+
+@media (max-width: 980px) {
+  
+.scroll-indicador {
+  width: 45px;
+  height: 100px;
+}
+.scroll-ruedita {
+  width: 20px;
+  height: 20px;
+}
+}
+
+@keyframes deslizarRuedita {
+  0% { transform: translateY(0); opacity: 0; }
+  20% { opacity: 0.5; }
+  80% { transform: translateY(30px); opacity: 0; }
+  100% { transform: translateY(25px); opacity: 0; }
+}
