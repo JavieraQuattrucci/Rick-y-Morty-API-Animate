@@ -2,6 +2,8 @@
 
 Proyecto Front-End para consumo de API REST pública desarrollado con **JavaScript Vainilla** (ECMAScript nativo).
 
+![Inicio](./img/pantallazo01.jpg)
+
 Implementa una navegación de scroll horizontal gestionada por hardware a través de **GSAP** y micro-interacciones mediante animaciones de **CSS** optimizadas (`will-change`, `transform: translate3d`).
 
  El flujo de datos consume la **REST API** pública mediante la **Rick y Morty API**, abstrayendo las peticiones HTTP a través de un **fetch asincrónico** (`async/await`) con persistencia en memoria interna (caché) para optimizar la velocidad de carga. 
