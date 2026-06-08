@@ -10,7 +10,10 @@ Implementa una navegación de scroll horizontal gestionada por hardware a travé
 
 El sitio está estructurado en una portada y 3 secciones internas, integra función `Math.random()`.
 
-![Inicio](./img/pantallazo02.jpg#width=100)
+
+<p align="center">
+<img src="./img/pantallazo02.jpg" width="400" alt="Inicio">
+</p>
 
 ## Instalación
 Básica, no requiere Node.js 
