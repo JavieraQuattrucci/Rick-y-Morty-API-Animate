@@ -2,6 +2,8 @@
 
 Proyecto Front-End para consumo de API REST pública desarrollado con **JavaScript Vainilla** (ECMAScript nativo).
 
+LINK AL SITIO: https://javieraquattrucci.github.io/Rick-y-Morty-API-Animate/ 
+
 ![Inicio](./img/pantallazo01.jpg)
 
 Implementa una navegación de scroll horizontal gestionada por hardware a través de **GSAP** y micro-interacciones mediante animaciones de **CSS** optimizadas (`will-change`, `transform: translate3d`).
