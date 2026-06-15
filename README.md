@@ -29,7 +29,7 @@ Básica, no requiere Node.js
 * **[Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Rick_and_Morty.svg)** - Vector oficial (SVG) 
 * **[Colin Jones (Pexels)](https://www.pexels.com/es-es/video/video-en-bucle-de-neon-galaxy-twirl-35235775/)** - Video
 
-El video lo he recortado, optimizado y formateado, logrando así un peso menor a 1MG para un video original de 60MB
+El video utilizado para el fondo estelar lo he recortado, optimizado y formateado a webm, logrando así un peso menor a 1MB para un video original de 60MB
 
 ### Repositorios de Código y Prototipos (CodePen)
 * **[Lucas Bebber](https://codepen.io/lbebber/pen/KwGEQv/)** 
